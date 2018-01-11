@@ -35,7 +35,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var storyTextView: UILabel!
     
     // TODO Step 5: Initialise instance variables here
-    
+    var index : Int = 1
     
     
     
@@ -44,6 +44,7 @@ class ViewController: UIViewController {
         
         
         // TODO Step 3: Set the text for the storyTextView, topButton, bottomButton, and to T1_Story, T1_Ans1, and T1_Ans2
+        updateView(story: story1, top: answer1a, bottom: answer1b)
         
     }
 
@@ -52,13 +53,46 @@ class ViewController: UIViewController {
     @IBAction func buttonPressed(_ sender: UIButton) {
     
         // TODO Step 4: Write an IF-Statement to update the views
-                
+        if sender.tag == 2 {
+            if index == 1 {
+                updateView(story: story2, top: answer2a, bottom: answer2b)
+                index = 2
+            }
+            else if index == 2 {
+                updateView(story: story4, top: answer2a, bottom: answer2b)
+                topButton.isHidden = true
+                bottomButton.isHidden = true
+                index = 4
+            }
+            else {
+                updateView(story: story5, top: answer3a, bottom: answer3b)
+                topButton.isHidden = true
+                bottomButton.isHidden = true
+                index = 3
+            }
+        }
+        else if sender.tag == 1 {
+            if index == 1 || index == 2 {
+                updateView(story: story3, top: answer3a, bottom: answer3b)
+                index = 3
+            }
+            else {
+                updateView(story: story6, top: answer3a, bottom: answer3b)
+                topButton.isHidden = true
+                bottomButton.isHidden = true
+                index = 6
+            }
+        }
         // TODO Step 6: Modify the IF-Statement to complete the story
         
     
     }
     
-
+    func updateView(story : String, top : String, bottom : String) {
+        storyTextView.text = story
+        topButton.setTitle(top, for: .normal)
+        bottomButton.setTitle(bottom, for: .normal)
+    }
 
 
 }
